@@ -1,4 +1,4 @@
-```markdown
+
 # EcoCommute Backend
 
 EcoCommute is a web application that calculates health risks associated with daily commuting, factoring in air pollution, noise pollution, and physical activity. This backend application is built using Node.js and Express.js, providing APIs to handle commute data and calculate risk scores.
