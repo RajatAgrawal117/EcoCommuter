@@ -1,0 +1,49 @@
+
+  .dashboard-container {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    padding: 2rem;
+    width: 100%;
+  }
+  
+  /* Content Wrapper */
+  .dashboard-content {
+    display: flex;
+    justify-content: center; /* Align centrally */
+    gap: 2rem; /* Adds spacing between cards */
+    width: 1300px;
+    max-width: 1300px;
+  }
+  
+  /* Dashboard Card */
+  .dashboard-card {
+    flex: 1; /* Ensures equal size for all cards */
+    padding: 2rem;
+    border: 1px solid #ddd;
+    border-radius: 18px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: black;
+    text-align: center;
+    transition: transform 0.3s ease;
+    min-width: 300px; /* Fixed minimum width for uniform size */
+    max-width: 350px; /* Prevent cards from becoming too large */
+    height: 250px; /* Fixed height for uniform cards */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Hover Effect */
+  .dashboard-card:hover {
+    transform: translateY(-10px); /* Slight hover effect */
+  }
+  
+  /* Highlighted Numbers */
+  .highlight {
+    color: #27ae60;
+    font-size: 3rem;
+    margin-top: 1rem;
+  }

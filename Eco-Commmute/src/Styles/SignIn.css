@@ -1,0 +1,59 @@
+/* Center the entire content vertically and horizontally */
+.signin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #2f4f4f; /* Light background color */
+    width: 1450px;
+  }
+  
+  /* Card style for the content */
+  .signin-card {
+    text-align: center;
+    background-color: #77c8c8;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Max width to avoid stretching */
+    box-sizing: border-box;
+  }
+  
+  /* Styling the title */
+  .signin-card h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+  }
+  
+  /* Styling the subtitle */
+  .signin-card p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #ffffff;
+  }
+  
+  /* Styling the sign-in button */
+  .signin-btn {
+    padding: 12px 30px;
+    background-color: #4285f4; /* Google sign-in color */
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Button hover effect */
+  .signin-btn:hover {
+    background-color: #357ae8;
+  }
+  
+  /* Make the button focused and interactive */
+  .signin-btn:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(66, 133, 244, 0.5);
+  }

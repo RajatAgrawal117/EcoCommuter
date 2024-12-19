@@ -1,0 +1,44 @@
+
+.dashboard {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  width: 1365px;
+  padding-top: 60px;
+}
+
+.dashboard-title {
+  
+  font-size:30px;
+  background-color: #2f4f4f;
+  color: white;
+  padding: 5px;
+  text-align: center;
+  border-radius: 35px; 
+}
+
+.dashboard-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+
+.dashboard-item h3 {
+  color: #dedada;
+}
+
+.number {
+  font-size: 2rem;
+  color: #2f7f4f;
+}
+
+.dashboard-graph {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.dashboard-graph img {
+  width: 100%;
+  height: auto;
+}  
