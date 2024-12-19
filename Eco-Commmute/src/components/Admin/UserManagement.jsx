@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const UserManagement = () => {
   // Placeholder user data
-  const [users, setUsers] = useState([
-    { id: 1, name: "John Doe", email: "johndoe@gmail.com", role: "Admin" },
-    { id: 2, name: "Jane Smith", email: "janesmith@gmail.com", role: "User" },
-    { id: 3, name: "Robert Brown", email: "robertbrown@gmail.com", role: "User" },
-    { id: 4, name: "Alice Green", email: "alicegreen@gmail.com", role: "Admin" },
-  ]);
-
+  const [users, setUsers] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate fetching user data from backend
+    setTimeout(() => {
+      setUsers([
+        { id: 1, name: "John Doe", email: "johndoe@gmail.com", role: "Admin" },
+        { id: 2, name: "Jane Smith", email: "janesmith@gmail.com", role: "User" },
+        { id: 3, name: "Robert Brown", email: "robertbrown@gmail.com", role: "User" },
+        { id: 4, name: "Alice Green", email: "alicegreen@gmail.com", role: "Admin" },
+      ]);
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   // Filtered users based on the search query
   const filteredUsers = users.filter(
@@ -29,26 +37,32 @@ const UserManagement = () => {
         onChange={(e) => setSearchQuery(e.target.value)}
         style={styles.searchBar}
       />
-      <table style={styles.table}>
-        <thead>
-          <tr>
-            <th style={styles.tableHeader}>Name</th>
-            <th style={styles.tableHeader}>Email</th>
-            <th style={styles.tableHeader}>Role</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredUsers.map((user) => (
-            <tr key={user.id} style={styles.tableRow}>
-              <td style={styles.tableCell}>{user.name}</td>
-              <td style={styles.tableCell}>{user.email}</td>
-              <td style={styles.tableCell}>{user.role}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {filteredUsers.length === 0 && (
-        <p style={styles.noResults}>No users match your search query.</p>
+      {loading ? (
+        <p style={styles.loading}>Loading users...</p>
+      ) : (
+        <>
+          <table style={styles.table}>
+            <thead>
+              <tr>
+                <th style={styles.tableHeader}>Name</th>
+                <th style={styles.tableHeader}>Email</th>
+                <th style={styles.tableHeader}>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredUsers.map((user) => (
+                <tr key={user.id} style={styles.tableRow}>
+                  <td style={styles.tableCell}>{user.name}</td>
+                  <td style={styles.tableCell}>{user.email}</td>
+                  <td style={styles.tableCell}>{user.role}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {filteredUsers.length === 0 && (
+            <p style={styles.noResults}>No users match your search query.</p>
+          )}
+        </>
       )}
     </div>
   );
@@ -78,6 +92,11 @@ const styles = {
     fontSize: "1rem",
     border: "1px solid #ccc",
     borderRadius: "5px",
+  },
+  loading: {
+    fontSize: "1.2rem",
+    color: "#888",
+    textAlign: "center",
   },
   table: {
     width: "100%",

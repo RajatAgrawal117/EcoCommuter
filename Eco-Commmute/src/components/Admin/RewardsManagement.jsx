@@ -15,6 +15,9 @@ const RewardsManagement = () => {
     running: "",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
   // Update input values dynamically
   const handleInputChange = (activity, value) => {
     setNewRewards({ ...newRewards, [activity]: value });
@@ -22,16 +25,24 @@ const RewardsManagement = () => {
 
   // Assign new points per km
   const handleAssignRewards = () => {
-    const updatedRewards = { ...rewards };
+    setLoading(true);
+    setSuccessMessage("");
 
-    Object.keys(newRewards).forEach((activity) => {
-      if (newRewards[activity]) {
-        updatedRewards[activity] = newRewards[activity]; // Update rewards if input is not empty
-      }
-    });
+    // Simulate backend call
+    setTimeout(() => {
+      const updatedRewards = { ...rewards };
 
-    setRewards(updatedRewards);
-    setNewRewards({ cycling: "", walking: "", running: "" }); // Clear input fields
+      Object.keys(newRewards).forEach((activity) => {
+        if (newRewards[activity]) {
+          updatedRewards[activity] = newRewards[activity]; // Update rewards if input is not empty
+        }
+      });
+
+      setRewards(updatedRewards);
+      setNewRewards({ cycling: "", walking: "", running: "" }); // Clear input fields
+      setLoading(false);
+      setSuccessMessage("Rewards updated successfully!");
+    }, 2000);
   };
 
   return (
@@ -79,9 +90,11 @@ const RewardsManagement = () => {
         </div>
       </div>
 
-      <button style={styles.button} onClick={handleAssignRewards}>
-        Assign New Points
+      <button style={styles.button} onClick={handleAssignRewards} disabled={loading}>
+        {loading ? "Updating..." : "Assign New Points"}
       </button>
+
+      {successMessage && <p style={styles.successMessage}>{successMessage}</p>}
     </div>
   );
 };
@@ -108,8 +121,6 @@ const styles = {
     justifyContent: "space-between",
     gap: "2rem",
     marginBottom: "2rem",
-    
-    
   },
   block: {
     flex: 1,
@@ -153,6 +164,12 @@ const styles = {
   },
   buttonHover: {
     backgroundColor: "#0056b3",
+  },
+  successMessage: {
+    marginTop: "1rem",
+    textAlign: "center",
+    color: "#27ae60",
+    fontSize: "1.2rem",
   },
 };
 

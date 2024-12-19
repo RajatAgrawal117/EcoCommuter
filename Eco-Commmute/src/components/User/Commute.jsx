@@ -1,48 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Commute = () => {
-  // Placeholder commute data
-  const [commutes, setCommutes] = useState([
-    {
-      id: 1,
-      name: "Office to Home",
-      date: "2024-12-16",
-      time: "08:30 AM",
-      from: "Office",
-      to: "Home",
-      status: "Completed",
-      mode: "🚲 Bicycle",
-      map: "Map placeholder 1",
-    },
-    {
-      id: 2,
-      name: "City Center to Mall",
-      date: "2024-12-15",
-      time: "10:00 AM",
-      from: "City Center",
-      to: "Mall",
-      status: "Not Completed",
-      mode: "🚌 Bus",
-      map: "Map placeholder 2",
-    },
-    {
-      id: 3,
-      name: "Home to Grocery Store",
-      date: "2024-12-14",
-      time: "03:00 PM",
-      from: "Home",
-      to: "Grocery Store",
-      status: "Completed",
-      mode: "🚶‍♂️ Walking",
-      map: "Map placeholder 3",
-    },
-  ]);
-
+  const [commutes, setCommutes] = useState([]);
   const [sortBy, setSortBy] = useState("date");
   const [expandedCommute, setExpandedCommute] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Simulate fetching commute data from backend
+  useEffect(() => {
+    const fetchCommutes = async () => {
+      try {
+        // Simulated data
+        const simulatedData = [
+          {
+            id: 1,
+            name: "Commute 1",
+            date: "2023-10-01",
+            time: "08:00 AM",
+            from: "Location A",
+            to: "Location B",
+            status: "Completed",
+            mode: "Car",
+            map: "Map will load here",
+          },
+          {
+            id: 2,
+            name: "Commute 2",
+            date: "2023-10-02",
+            time: "09:00 AM",
+            from: "Location C",
+            to: "Location D",
+            status: "Pending",
+            mode: "Bus",
+            map: "Map will load here",
+          },
+        ];
+        setCommutes(simulatedData);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching commute data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchCommutes();
+  }, []);
 
   // Sorting functionality
-  const sortedCommutes = commutes.sort((a, b) => {
+  const sortedCommutes = [...commutes].sort((a, b) => {
     if (sortBy === "date") {
       return new Date(b.date) - new Date(a.date);
     } else if (sortBy === "status") {
@@ -54,6 +59,10 @@ const Commute = () => {
   const toggleDetails = (id) => {
     setExpandedCommute(expandedCommute === id ? null : id);
   };
+
+  if (loading) {
+    return <p>Loading commute data...</p>;
+  }
 
   return (
     <div style={styles.container}>
@@ -95,7 +104,9 @@ const Commute = () => {
 
             {expandedCommute === commute.id && (
               <div style={styles.commuteDetails}>
-                <p><strong>Mode of Transport:</strong> {commute.mode}</p>
+                <p>
+                  <strong>Mode of Transport:</strong> {commute.mode}
+                </p>
                 <div style={styles.mapContainer}>
                   <h4>Google Maps Route</h4>
                   <div style={styles.map}>{commute.map}</div>
@@ -178,7 +189,7 @@ const styles = {
     backgroundColor: "#f4f4f4",
     borderRadius: "8px",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-    color:"black"
+    color: "black",
   },
   mapContainer: {
     marginTop: "1rem",
@@ -192,7 +203,7 @@ const styles = {
     color: "black",
     fontSize: "1rem",
     fontStyle: "italic",
-    padding:"10px"
+    padding: "10px",
   },
   map: {
     width: "1300px",
@@ -203,7 +214,6 @@ const styles = {
     lineHeight: "300px",
     color: "#888",
     fontSize: "1.2rem",
-    
   },
 };
 

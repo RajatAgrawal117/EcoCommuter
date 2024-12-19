@@ -1,13 +1,12 @@
-//../routes/commute.js
 const express = require('express');
-const { authenticateToken } = require('../middleware/authMiddleware'); // Auth Middleware
-const { addCommute, getUserCommutes,getRecentCommutes } = require('../controllers/Commute'); // Controller
+const CommuteController = require('../controllers/Commute');
+const { authenticateToken } = require('../middleware/authMiddleware');
+
 const router = express.Router();
 
-// Add commute (POST)
-router.post('/', authenticateToken, addCommute);
+// Commute routes
+router.post('/', authenticateToken, CommuteController.addCommute); // Add commute
+router.get('/', authenticateToken, CommuteController.getUserCommutes); // Get all user commutes
+router.get('/recent', authenticateToken, CommuteController.getRecentCommutes); // Get recent commutes
 
-// Get all user commutes (GET)
-router.get('/', authenticateToken, getUserCommutes);
-router.get('/recent', authenticateToken, getRecentCommutes);
 module.exports = router;

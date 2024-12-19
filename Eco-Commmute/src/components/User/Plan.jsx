@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 const Plan = () => {
   const [routePlanName, setRoutePlanName] = useState("");
@@ -7,9 +9,49 @@ const Plan = () => {
   const [fromLocation, setFromLocation] = useState("");  // From location
   const [toLocation, setToLocation] = useState("");  // To location
   const [showMap, setShowMap] = useState(false);
+  const [routeDetails, setRouteDetails] = useState(null);
+  const [alternateRoutes, setAlternateRoutes] = useState([]);
 
   const handleSearch = () => {
-    setShowMap(true); // Make Google Maps container visible
+    setShowMap(true); // Make map container visible
+    // Simulate fetching route details from backend
+    setRouteDetails({
+      distance: "10 km",
+      duration: "30 mins",
+      pollution: "Moderate",
+      steps: [
+        "Start from A",
+        "Turn left at B",
+        "Continue straight to C",
+        "Arrive at D"
+      ]
+    });
+
+    // Simulate fetching alternate routes
+    setAlternateRoutes([
+      {
+        distance: "12 km",
+        duration: "35 mins",
+        pollution: "Low",
+        steps: [
+          "Start from A",
+          "Turn right at E",
+          "Continue straight to F",
+          "Arrive at D"
+        ]
+      },
+      {
+        distance: "11 km",
+        duration: "33 mins",
+        pollution: "Low",
+        steps: [
+          "Start from A",
+          "Turn left at G",
+          "Continue straight to H",
+          "Arrive at D"
+        ]
+      }
+    ]);
   };
 
   const handleFlip = () => {
@@ -93,19 +135,60 @@ const Plan = () => {
           />
         </div>
 
-       
         {/* Search Button */}
         <div style={styles.buttonContainer}>
           <button onClick={handleSearch} style={styles.searchButton}>Search Route</button>
         </div>
       </div>
 
-      {/* Google Maps Container */}
+      {/* Map Container */}
       {showMap && (
         <div style={styles.mapContainer}>
-          <h3 style={styles.mapTitle}>Google Maps Route</h3>
-          {/* Google Maps API integration will go here */}
-          <div style={styles.map}>Map will load here</div>
+          <h3 style={styles.mapTitle}>Route Map</h3>
+          <MapContainer center={[51.505, -0.09]} zoom={13} style={styles.map}>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <Marker position={[51.505, -0.09]}>
+              <Popup>
+                Start from A
+              </Popup>
+            </Marker>
+          </MapContainer>
+          {routeDetails && (
+            <div style={styles.routeDetails}>
+              <p><strong>Distance:</strong> {routeDetails.distance}</p>
+              <p><strong>Duration:</strong> {routeDetails.duration}</p>
+              <p><strong>Pollution Level:</strong> {routeDetails.pollution}</p>
+              <p><strong>Steps:</strong></p>
+              <ul>
+                {routeDetails.steps.map((step, index) => (
+                  <li key={index}>{step}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Alternate Routes */}
+      {showMap && alternateRoutes.length > 0 && (
+        <div style={styles.alternateRoutesContainer}>
+          <h3 style={styles.mapTitle}>Alternate Less Polluted Routes</h3>
+          {alternateRoutes.map((route, index) => (
+            <div key={index} style={styles.alternateRoute}>
+              <p><strong>Distance:</strong> {route.distance}</p>
+              <p><strong>Duration:</strong> {route.duration}</p>
+              <p><strong>Pollution Level:</strong> {route.pollution}</p>
+              <p><strong>Steps:</strong></p>
+              <ul>
+                {route.steps.map((step, stepIndex) => (
+                  <li key={stepIndex}>{step}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       )}
     </div>
@@ -122,7 +205,6 @@ const styles = {
     width: "1300px",
     padding: "70px"
   },
-  
   title: {
     fontSize: "2rem",
     fontWeight: "bold",
@@ -155,7 +237,6 @@ const styles = {
     display: "flex",
     justifyContent: "left",
     marginTop: "-0.5rem", // Moves the button slightly up between the two fields
-    
   },
   flipButton: {
     width: "40px",
@@ -168,7 +249,6 @@ const styles = {
     cursor: "pointer",
     boxShadow: "0 2px 5px rgba(0, 0, 0, 0.2)",
     transition: "background-color 0.3s ease",
-    
   },
   buttonContainer: {
     marginTop: "1rem",
@@ -188,9 +268,9 @@ const styles = {
   },
   mapContainer: {
     marginTop: "2rem",
-    width: "1290px",
-    maxWidth: "1800px",
-    height: "800px",
+    width: "100%",
+    maxWidth: "1200px",
+    height: "500px",
     backgroundColor: "#dcdcdc",
     borderRadius: "8px",
     display: "flex",
@@ -205,14 +285,30 @@ const styles = {
     color: "#333",
   },
   map: {
-    width: "90%",
-    height: "80%",
-    backgroundColor: "#f0f0f0",
+    width: "100%",
+    height: "100%",
     borderRadius: "8px",
-    textAlign: "center",
-    lineHeight: "500px",
-    color: "#888",
-    fontSize: "1.2rem",
+  },
+  routeDetails: {
+    marginTop: "1rem",
+    textAlign: "left",
+    width: "90%",
+  },
+  alternateRoutesContainer: {
+    marginTop: "2rem",
+    width: "100%",
+    maxWidth: "1200px",
+    backgroundColor: "#f9f9f9",
+    borderRadius: "8px",
+    padding: "1rem",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+  },
+  alternateRoute: {
+    marginBottom: "1rem",
+    padding: "1rem",
+    backgroundColor: "#fff",
+    borderRadius: "8px",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
   },
 };
 

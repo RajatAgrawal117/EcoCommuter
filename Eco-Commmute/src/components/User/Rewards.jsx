@@ -27,6 +27,10 @@ const Rewards = () => {
         <h3>🎁 Reward: Free Coffee</h3>
         <p>Cost: 300 Points</p>
       </div>
+      <div style={styles.rewardCard}>
+        <h3>🎁 Reward: Movie Ticket</h3>
+        <p>Cost: 700 Points</p>
+      </div>
 
       {/* Redeem Button - aligned to the right */}
       <div style={styles.redeemButtonContainer}>

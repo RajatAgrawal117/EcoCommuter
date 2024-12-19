@@ -3,29 +3,34 @@ import React from "react";
 const AppAnalytics = () => {
   return (
     <div style={styles.container}>
-      <h1 style={styles.title}>Analytics</h1>
+      <h1 style={styles.title}>Analytics Dashboard</h1>
 
-      {/* Total Routes Calculated */}
-      <div style={styles.analyticsBox}>
-        <h2 style={styles.boxTitle}>Total Routes Calculated</h2>
-        <div style={styles.dataContainer}>
-          {/* Placeholder for backend data */}
+      <div style={styles.analyticsGrid}>
+        {/* Total Routes Calculated */}
+        <div style={styles.analyticsCard}>
+          <h2 style={styles.cardTitle}>Total Routes Calculated</h2>
+          <div style={styles.dataContainer}>
+            <p style={styles.dataText}>1,234 routes calculated</p>
+          </div>
         </div>
-      </div>
 
-      {/* Most Used Modes of Transport */}
-      <div style={styles.analyticsBox}>
-        <h2 style={styles.boxTitle}>Most Used Modes of Transport</h2>
-        <div style={styles.dataContainer}>
-          {/* Placeholder for backend data */}
+        {/* Most Used Modes of Transport */}
+        <div style={styles.analyticsCard}>
+          <h2 style={styles.cardTitle}>Most Used Modes of Transport</h2>
+          <div style={styles.dataContainer}>
+            <p style={styles.dataText}>Bicycle: 45%</p>
+            <p style={styles.dataText}>Bus: 30%</p>
+            <p style={styles.dataText}>Car: 15%</p>
+            <p style={styles.dataText}>Walking: 10%</p>
+          </div>
         </div>
-      </div>
 
-      {/* Total Pollution Data Fetched */}
-      <div style={styles.analyticsBox}>
-        <h2 style={styles.boxTitle}>Total Pollution Data Fetched</h2>
-        <div style={styles.dataContainer}>
-          {/* Placeholder for backend data */}
+        {/* Total Pollution Data Fetched */}
+        <div style={styles.analyticsCard}>
+          <h2 style={styles.cardTitle}>Total Pollution Data Fetched</h2>
+          <div style={styles.dataContainer}>
+            <p style={styles.dataText}>42,000 data points</p>
+          </div>
         </div>
       </div>
     </div>
@@ -41,46 +46,57 @@ const styles = {
     minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
-    alignItems: "center", // Center boxes horizontally
-    gap: "1rem", // Space between boxes
-    width: "1300px",
-    padding: "70px"
-    
+    alignItems: "center",
+    gap: "2rem",
+    width: "100%",
+    maxWidth: "1200px",
+    margin: "0 auto",
   },
   title: {
-    fontSize: "2rem",
+    fontSize: "2.5rem",
     fontWeight: "bold",
     color: "#333",
-    marginBottom: "1rem",
+    marginBottom: "2rem",
   },
-  analyticsBox: {
+  analyticsGrid: {
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr 1fr",
+    gap: "2rem",
     width: "100%",
-    maxWidth: "900px", 
+  },
+  analyticsCard: {
     backgroundColor: "white",
     borderRadius: "10px",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    padding: "1.5rem",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    padding: "2rem",
     textAlign: "center",
     border: "1px solid #ddd",
-    height:"450px"
   },
-  boxTitle: {
+  cardTitle: {
     fontSize: "1.5rem",
     fontWeight: "bold",
     color: "#007bff",
     marginBottom: "1rem",
   },
   dataContainer: {
-    height: "350px", // Placeholder height for backend data
     backgroundColor: "#f4f4f4",
     borderRadius: "8px",
     display: "flex",
+    flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     color: "#888",
-    fontSize: "1rem",
+    fontSize: "1.2rem",
     fontStyle: "italic",
     border: "1px dashed #ccc",
+    padding: "1rem",
+    height: "auto",
+  },
+  dataText: {
+    color: "#333",
+    fontSize: "1.2rem",
+    fontStyle: "normal",
+    margin: "0.5rem 0",
   },
 };
 

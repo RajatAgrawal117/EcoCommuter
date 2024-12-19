@@ -12,15 +12,24 @@ const Settings = () => {
 };
 
 const styles = {
-  container: {fontFamily: "'Arial', sans-serif",width: "1300px",
-    padding: "10px" , height: "700px", fontSize:"30px"},
-  title: { fontSize: "2rem", marginBottom: "1rem", color: "white" },
-  list:{
+  container: {
+    fontFamily: "'Arial', sans-serif",
+    width: "1300px",
+    padding: "70px",
+    minHeight: "100vh",
+    backgroundColor: "#f9f9f9",
+    color: "#333",
+  },
+  title: {
+    fontSize: "2rem",
+    marginBottom: "1rem",
+    color: "#333",
+  },
+  list: {
     margin: "30px",
-    fontSize:"20px"
-
-  }
-
+    fontSize: "20px",
+    color: "#555",
+  },
 };
 
 export default Settings;
